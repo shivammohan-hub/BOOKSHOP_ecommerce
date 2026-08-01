@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    
+
+    {% include "admin/admin_header.html" %}
+
+
+    <div class="w-full px-[10%] py-10 bg-slate-100  flex items-center justify-center">
+        <form class="w-[60%] bg-white border shadow flex flex-col gap-8 p-10 " action="" method="post">
+            {% csrf_token %}
+            <h1 class="text-black font-bold text-3xl">Insert Genre</h1>
+            <div class=" w-full text-md flex flex-col justify-between">
+                <label class="font-semibold" for="">Title :</label>
+                <input class=" border rounded p-3" value="{{genre.title}}" type="text" name="title">
+            </div>
+
+            <div class=" w-full text-md flex flex-col justify-between">
+                <label class="font-semibold" for="">Description :</label>
+                <textarea class=" border rounded p-3" rows="7" name="description">{{genre.description}}</textarea>
+            </div>
+
+
+            <input type="submit" class="w-full py-2 bg-teal-600 hover:bg-teal-700 text-md text-white font-semibold rounded">
+        </form>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+<div class="flex flex-1 justify-between bg-black text-white px-[10%] py-4">
+        <h1 class="text-2xl font-bold">BookShop <span class="text-rose-600">Admin</span></h1>
+    
+
+
+    <nav class="flex items-center gap-4">
+        <span class="font-semibold text-white text-slate-600 hover:text-rose-600 transition">
+            {% if request.user.first_name %}
+                {{request.user.first_name}}
+            {% else %}
+                {{request.user.username}}
+            {% endif %}
+        </span>
+        <a class="font-semibold text-white hover:text-rose-600 transition"
+           href="{% url 'logout' %}">
+            Logout
+        </a>
+    </nav>
+    </div>
+
+    <div class="flex flex-1 gap-5  py-3 px-[10%] bg-slate-900 text-white font-semibold">
+        <a href="{% url 'admin_dashboard' %}">Home</a>
+        <a href="{% url 'insert_genre' %}">Insert Genre</a>
+        <a href="{% url 'insert_book' %}">Insert Book</a>
+        <a href="{% url 'manage_genre' %}">Manage Genre</a>
+        <a href="{% url 'manage_books' %}">Manage Book</a>
+    </div>

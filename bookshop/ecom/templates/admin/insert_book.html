@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    
+
+    {% include "admin/admin_header.html" %}
+
+
+    <div class="w-full px-[10%] py-10 bg-slate-100  flex items-center justify-center">
+        <form class="w-[60%] bg-white border shadow flex flex-col gap-8 p-10 " enctype="multipart/form-data" action="" method="post">
+            {% csrf_token %}
+            <h1 class="text-black font-bold text-3xl">Insert Book</h1>
+            <div class=" w-full text-md flex flex-col justify-between">
+                <label class="font-semibold" for="">Title :</label>
+                <input class=" border rounded p-3" value="{{book.title}}" type="text" name="title">
+            </div>
+
+            <div class=" w-full text-md flex flex-col justify-between">
+                <label class="font-semibold" for="">Author :</label>
+                <input class=" border rounded p-3" type="text" value="{{book.author}}" name="author">
+            </div>
+
+            <div class=" w-full text-md flex flex-col justify-between">
+                <label class="font-semibold" for="">Number of Pages :</label>
+                <input class=" border rounded p-3" type="text" value="{{book.nop}}" name="nop">
+            </div>
+
+            <div class=" w-full text-md flex flex-col justify-between">
+                <label class="font-semibold" for="">ISBN :</label>
+                <input class=" border rounded p-3" type="text" value="{{book.isbn}}" name="isbn">
+            </div>
+
+            <div class=" w-full text-md flex flex-col justify-between">
+                <label class="font-semibold" for="">Publish Year :</label>
+                <input class=" border rounded p-3" type="text"  value="{{book.publish_year}}" name="publish_year">
+            </div>
+
+            <div class=" w-full text-md flex flex-col justify-between">
+                <label class="font-semibold" for="">Genre :</label>
+                <select name="genre" class="w-full border px-3 py-2 rounded" id="">
+                    <option value="">Select Genre</option>
+                    {% for g in genre %}
+                    <option value="{{g.id}}">{{g.title}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class=" w-full text-md flex flex-col justify-between">
+                <label class="font-semibold" for="">Cover Image :</label>
+                <input class="border rounded p-3" type="file" name="cover_image">
+            </div>
+            
+
+
+            <input type="submit" class="w-full py-2 bg-teal-600 hover:bg-teal-700 text-md text-white font-semibold rounded">
+        </form>
+    </div>
+
+</body>
+</html>

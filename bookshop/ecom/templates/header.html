@@ -1,0 +1,78 @@
+<header class="sticky top-0 z-50 bg-[linear-gradient(327deg,#0b080c_0%,#42050b_55%,#0b0d08_100%)] border-b border-zinc-800 shadow-lg ">
+
+    <div class="max-w-7xl mx-auto h-20 px-8 flex items-center justify-between">
+
+        <!-- Logo -->
+        <a href="{% url 'homepage' %}"
+           class="text-3xl font-extrabold tracking-tight text-white">
+
+            E<span class="text-rose-600">Book</span>Shop
+
+        </a>
+
+        <!-- Search -->
+        <form action="{% url 'search' %}" method="get"
+              class="flex w-[430px]">
+
+            <input
+                type="text"
+                name="search"
+                placeholder="Search books..."
+                class="w-full rounded-l-xl bg-zinc-900 border border-zinc-700 text-white placeholder:text-zinc-500 px-5 py-3 outline-none focus:border-rose-600 focus:ring-2 focus:ring-rose-600/20">
+
+            <button
+                class="bg-rose-600 hover:bg-rose-700 px-6 rounded-r-xl text-white font-semibold transition duration-300">
+
+                Search
+
+            </button>
+
+        </form>
+
+        <!-- Menu -->
+        <nav class="flex items-center gap-7">
+
+            <a class="font-medium text-zinc-300 hover:text-rose-600 transition"
+               href="{% url 'homepage' %}">
+                Home
+            </a>
+
+            <a class="font-medium text-zinc-300 hover:text-rose-600 transition"
+               href="">
+                Cart
+            </a>
+
+            {% if request.user.is_authenticated %}
+
+            <span class="font-medium text-white bg-zinc-900 px-4 py-2 rounded-xl border border-zinc-700">
+                {% if request.user.first_name %}
+                    {{request.user.username}}
+                {% else %}
+                    {{request.user.first_name}}
+                {% endif %}
+            </span>
+
+            <a class="font-medium text-zinc-300 hover:text-rose-600 transition"
+               href="{% url 'logout' %}">
+                Logout
+            </a>
+
+            {% else %}
+
+            <a class="font-medium text-zinc-300 hover:text-rose-600 transition"
+               href="{% url 'login' %}">
+                Login
+            </a>
+
+            <a class="bg-rose-600 hover:bg-rose-700 text-white rounded-xl px-5 py-2.5 font-semibold transition duration-300 shadow-lg shadow-rose-600/20"
+               href="{% url 'register' %}">
+                Register
+            </a>
+
+            {% endif %}
+
+        </nav>
+
+    </div>
+
+</header>

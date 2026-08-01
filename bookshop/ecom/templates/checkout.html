@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    {% load static %}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BookShop | Checkout</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        background: #f3f4f6;
+      }
+      form p {
+        margin-bottom: 16px;
+      }
+      form label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 6px;
+      }
+      form input,
+      form select,
+      form textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #d1d5db;
+        border-radius: 6px;
+      }
+    </style>
+  </head>
+  <body>
+    {% include "header.html" %}
+    <div class="max-w-6xl mx-auto p-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div class="lg:col-span-2">
+        <form method="post">
+          {% csrf_token %}
+          <div class="bg-white border rounded-lg p-6 mb-6">
+            <h2 class="text-2xl font-bold mb-4">Saved Addresses</h2>
+            {% for address in addresses %}
+            <label class="block flex gap-10 border rounded-lg p-4 mb-3 cursor-pointer">
+              <input
+                type="radio"
+                name="address_id"
+                value="{{address.id}}"
+                class="mb-3 h-5 w-5"
+              />
+              <div>
+                <p class="font-semibold">{{address.fullname}}</p>
+                <p>{{address.street}}, {{address.area}}</p>
+                <p>{{address.city}}, {{address.state}} - {{address.pincode}}</p>
+                <p>{{address.contact}}</p>
+              </div>
+            </label>
+            {% empty %}
+            <p class="text-gray-500">No saved addresses.</p>
+            {% endfor %}
+          </div>
+          <div class="bg-white border rounded-lg p-6">
+            <h2 class="text-2xl font-bold mb-4">Add New Address</h2>
+            {{form.as_p}}
+            <input
+              type="submit"
+              value="Proceed to Pay"
+              class="w-full bg-rose-600 text-white py-3 rounded mt-4"
+            />
+          </div>
+        </form>
+      </div>
+      
+      <div class="bg-white rounded shadow p-5 flex flex-col gap-8 w-full">
+
+
+            <h3 class="text-xl font-bold">
+                Order Summary
+            </h3>
+
+
+            <div class="flex justify-between">
+                <span>Subtotal</span>
+                <span>₹{{order.getSubTotal}}</span>
+            </div>
+
+            <div class="flex justify-between ">
+                <span>Tax (GST 18%)</span>
+                <span>₹{{order.getTaxTotal}}</span>
+            </div>
+
+
+            <div class="flex justify-between">
+                <span>Shipping</span>
+                <span>
+                    {% if not order.getShippingCharge %}
+                        free 
+                    {% else %}
+                        {{order.getShippingCharge}}
+                    {% endif %}
+                </span>
+            </div>
+
+
+            <hr class="my-4">
+
+
+            <div class="flex justify-between font-bold">
+
+                <span>Total</span>
+
+                <span class="text-rose-600">
+                    ₹{{order.getPayableAmount}}
+                </span>
+
+            </div>
+
+            <a href="{% url 'checkout' %}" class="w-full text-center bg-gray-900 text-white py-2.5 rounded font-medium hover:bg-gray-800 w-full" {% if not order_items %}disabled{% endif %}>
+                        Proceed to Checkout
+                    </a>
+
+        </div>
+
+    </div>
+  </body>
+</html>

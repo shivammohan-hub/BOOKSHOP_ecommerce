@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookEshop</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-slate-50">
+
+{% include "header.html" %}
+
+<div class="max-w-7xl mx-auto px-6 py-10">
+
+    <!-- Hero Banner -->
+
+    <div class="bg-[linear-gradient(190deg,#b6165e_0%,#c80933_50%,#a61731_100%)] rounded-[32px] px-12 py-12 text-white shadow-lg">
+
+        <h1 class="text-5xl font-extrabold">
+            Discover Your Next Great Read
+        </h1>
+
+        <p class="mt-4 text-lg text-rose-100 max-w-2xl">
+            Explore thousands of books across every genre. Discover bestsellers,
+            timeless classics and your next favorite story.
+        </p>
+
+    </div>
+
+
+    <div class="flex gap-8 mt-10">
+
+        <!-- Sidebar -->
+
+        <aside class="w-64">
+
+            <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 sticky top-28">
+
+                <h2 class="text-2xl font-bold text-slate-800 mb-6">
+                    Genres
+                </h2>
+
+                <div class="space-y-2">
+
+                    <a href="{% url 'homepage' %}"
+                       class="flex items-center justify-between bg-rose-600 text-white rounded-xl px-5 py-3 font-semibold">
+
+                        <span>All Books</span>
+
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             class="w-4 h-4"
+                             fill="none"
+                             viewBox="0 0 24 24"
+                             stroke="currentColor">
+
+                            <path stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke-width="2"
+                                  d="M9 5l7 7-7 7"/>
+
+                        </svg>
+
+                    </a>
+
+                    {% for g in genre %}
+
+                    <a href="{% url 'filterByGenre' g.id %}"
+                       class="flex items-center justify-between px-5 py-3 rounded-xl text-slate-600 hover:bg-rose-50 hover:text-rose-600 transition">
+
+                        <span>{{g.title}}</span>
+
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             class="w-4 h-4"
+                             fill="none"
+                             viewBox="0 0 24 24"
+                             stroke="currentColor">
+
+                            <path stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke-width="2"
+                                  d="M9 5l7 7-7 7"/>
+
+                        </svg>
+
+                    </a>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+        </aside>
+
+
+        <!-- Books -->
+
+        <section class="flex-1">
+
+            <div class="flex justify-between items-center mb-8">
+
+                <div>
+
+                    <h2 class="text-3xl font-bold text-slate-800">
+                        Featured Books
+                    </h2>
+
+                    <p class="text-slate-500 mt-2">
+                        Handpicked books for every reader.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="grid grid-cols-3 gap-6">
+
+                {% for b in books %}
+
+                <a href="{% url 'bookDetails' b.id %}"
+                   class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl hover:border-rose-300 hover:-translate-y-1 transition duration-300">
+
+                    <!-- Image -->
+
+                    <div class="bg-slate-100 h-48 flex items-center rounded justify-center">
+                        <img src="{{b.cover_image.url}}" class="h-36 rounded">
+                    </div>
+
+                    <!-- Details -->
+                    <div class="px-5 py-3 flex flex-col gap-2">
+                        <h3 class="text-lg font-bold text-slate-800 truncate">
+                            {{b.title}}
+                        </h3>
+
+                        <p class="text-sm text-slate-500 truncate">
+                            {{b.author}}
+                        </p>
+
+                            <span class="text-2xl font-bold text-rose-600">
+                                ₹ {{b.price}}
+                            </span>
+
+                            <button
+                            class="w-full bg-rose-600 hover:bg-rose-700 rounded-xl py-2 text-white font-semibold transition">Add to Cart
+                        </button>
+
+                
+                    </div>
+
+                </a>
+
+                {% endfor %}
+
+            </div>
+        </section>
+    </div>
+</div>
+
+</body>
+</html>

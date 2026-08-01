@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | BookEshop</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+
+body{
+    font-family: Inter, sans-serif;
+    background:#f8fafc;
+}
+
+/* Card */
+
+.shadow-lg{
+    transition:.35s ease;
+}
+
+.shadow-lg:hover{
+    transform:translateY(-6px);
+    box-shadow:0 20px 45px rgba(15,23,42,.12);
+}
+
+/* Form Layout */
+
+form p{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    margin-bottom:20px;
+}
+
+/* Labels */
+
+form label{
+    font-size:15px;
+    font-weight:600;
+    color:#334155;
+}
+
+/* Inputs */
+
+form input[type=text],
+form input[type=password],
+form input[type=email]{
+
+    width:100%;
+    padding:14px 16px;
+    border:1px solid #cbd5e1;
+    border-radius:12px;
+    background:white;
+    font-size:15px;
+    outline:none;
+    transition:.25s;
+
+}
+
+/* Focus */
+
+form input:focus{
+
+    border-color:#e11d48;
+    box-shadow:0 0 0 4px rgba(225,29,72,.12);
+
+}
+
+/* Placeholder */
+
+form input::placeholder{
+
+    color:#94a3b8;
+
+}
+
+/* Login Button */
+
+button{
+
+    margin-top:10px;
+    letter-spacing:.3px;
+    box-shadow:0 8px 20px rgba(225,29,72,.25);
+
+}
+
+button:hover{
+
+    transform:translateY(-2px);
+    box-shadow:0 15px 28px rgba(225,29,72,.35);
+
+}
+
+/* Error Messages */
+
+.errorlist{
+
+    list-style:none;
+    padding:0;
+    margin:0 0 15px;
+
+}
+
+.errorlist li{
+
+    background:#fff1f2;
+    border:1px solid #fecdd3;
+    color:#be123c;
+    padding:12px 15px;
+    border-radius:10px;
+    font-size:14px;
+
+}
+
+/* Help Text */
+
+.helptext{
+
+    display:none;
+
+}
+
+/* Autofill */
+
+input:-webkit-autofill{
+
+    -webkit-box-shadow:0 0 0 1000px white inset;
+
+}
+
+/* Links */
+
+a{
+
+    transition:.25s;
+
+}
+
+a:hover{
+
+    text-decoration:underline;
+
+}
+
+/* Smooth Transitions */
+
+*{
+
+    transition:
+        border-color .25s,
+        box-shadow .25s,
+        transform .25s;
+
+}
+
+</style>
+
+</head>
+
+<body class="bg-slate-50">
+
+{% include "header.html" %}
+
+<div class="min-h-[calc(100vh-80px)] flex items-center justify-center px-6">
+
+    <div class="w-[460px]">
+
+        <!-- Card -->
+
+        <div class="bg-white rounded-xl border border-slate-200 shadow-lg overflow-hidden">
+
+            <!-- Top -->
+
+            <div class="px-10 py-6 text-center">
+
+                <h1 class="text-4xl font-bold">
+                    Welcome Back
+                </h1>
+                <p class="text-slate-600 p-3 text-center">
+                    Login to continue your reading journey.
+                </p>
+            </div>
+
+            <!-- Form -->
+
+            <div class="px-10">
+
+                
+
+                <form action="" method="post" class="flex flex-col gap-5">
+                    {% csrf_token %}
+
+                    {{loginForm.as_p}}
+
+                    <button
+                        type="submit"
+                        class="w-full bg-rose-600 hover:bg-rose-700 text-white py-3 rounded-xl font-semibold transition">
+
+                        Login
+
+                    </button>
+
+                </form>
+
+                <div class="py-8 text-center">
+
+                    <p class="text-slate-500">
+
+                        Don't have an account?
+
+                        <a href=""
+                           class="text-rose-600 hover:text-rose-700 font-semibold">
+
+                            Register
+
+                        </a>
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
